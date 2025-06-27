@@ -1,25 +1,67 @@
 #!/bin/bash
 
-# Chemin du script en cours
-SCRIPT_PATH="$(readlink -f "$0")"
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+# Variables
+INSTALL_DIR="/opt/autopwn"
+LAUNCHER="/usr/local/bin/autopwn"
+REPO_URL="https://github.com/zeco37/autopwn-apt.git"
+REPO_SUBDIR="autopwn-1.0"
+MAIN_FILE="autopwn.py"
+REQUIRED_FILES=("autopwn.py" "setup_autopwn.sh")
+REQUIRED_DIRS=("scanner" "spoofing" "payloads" "core" "listener" "sniffer" "dns_enum" "web_tech" "bruteforce" "exploits" "hash_id")
 
-# Vérifier si autopwn.py existe dans le même dossier
-if [ ! -f "$SCRIPT_DIR/autopwn.py" ]; then
-    echo "❌ Erreur : autopwn.py est introuvable dans $SCRIPT_DIR"
-    echo "Assurez-vous que autopwn.py et ce script sont dans le même dossier."
-    exit 1
+echo "🔧 AutoPwn Setup – Lancement global sans python3"
+
+# Create install dir if doesn't exist
+mkdir -p "$INSTALL_DIR"
+
+# Vérification des fichiers
+cd "$INSTALL_DIR" 2>/dev/null || exit 1
+MISSING=0
+
+for f in "${REQUIRED_FILES[@]}"; do
+    if [[ ! -f "$f" ]]; then
+        echo "[!] Fichier manquant : $f"
+        MISSING=1
+    fi
+done
+
+for d in "${REQUIRED_DIRS[@]}"; do
+    if [[ ! -d "$d" ]]; then
+        echo "[!] Dossier manquant : $d"
+        MISSING=1
+    fi
+done
+
+# Si fichiers manquants → demande de réinstallation
+if [[ "$MISSING" == 1 ]]; then
+    echo -e "\n⚠️ Des fichiers sont manquants ou modifiés. Voulez-vous réinstaller AutoPwn ? (yes/no)"
+    read -r answer
+    if [[ "$answer" == "yes" ]]; then
+        echo "[+] Téléchargement et installation d'AutoPwn…"
+        rm -rf "$INSTALL_DIR"
+        git clone "$REPO_URL" "$INSTALL_DIR"
+        cd "$INSTALL_DIR/$REPO_SUBDIR" || { echo "[-] Erreur : Chemin invalide."; exit 1; }
+
+        # Déplacer tous les fichiers vers /opt/autopwn
+        mv * ../..
+        cd ../..
+        rm -rf "$INSTALL_DIR/$REPO_SUBDIR"
+
+        if [[ ! -f "$MAIN_FILE" ]]; then
+            echo "[-] Erreur : Le fichier principal $MAIN_FILE est introuvable après le clonage."
+            exit 1
+        fi
+    else
+        echo "✖️ Installation annulée."
+        exit 0
+    fi
+else
+    echo "✅ AutoPwn est déjà installé et à jour."
 fi
 
-# Copier le projet vers /opt/autopwn
-echo "📦 Copie du projet dans /opt/autopwn ..."
-sudo mkdir -p /opt/autopwn
-sudo cp -r "$SCRIPT_DIR/"* /opt/autopwn/
+# Création du lanceur global
+echo "[*] Création du lanceur global…"
+echo -e "#!/bin/bash\npython3 \"$INSTALL_DIR/$MAIN_FILE\" \"\$@\"" | sudo tee "$LAUNCHER" >/dev/null
+sudo chmod +x "$LAUNCHER"
 
-# Créer le lanceur global
-echo "⚙️ Création du lanceur global /usr/local/bin/autopwn ..."
-echo '#!/bin/bash' | sudo tee /usr/local/bin/autopwn > /dev/null
-echo 'python3 /opt/autopwn/autopwn.py "$@"' | sudo tee -a /usr/local/bin/autopwn > /dev/null
-sudo chmod +x /usr/local/bin/autopwn
-
-echo "✅ Installation terminée ! Vous pouvez exécuter AutoPwn depuis n’importe où avec la commande : autopwn"
+echo -e "✅ Installation terminée. Vous pouvez lancer AutoPwn avec : \033[1mautopwn\033[0m"
