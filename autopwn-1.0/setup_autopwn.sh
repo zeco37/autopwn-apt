@@ -11,12 +11,11 @@ REQUIRED_DIRS=("scanner" "spoofing" "payloads" "core" "listener" "sniffer" "dns_
 
 echo "🔧 AutoPwn Setup – Lancement global sans python3"
 
-# Create install dir if doesn't exist
 mkdir -p "$INSTALL_DIR"
 
 # Vérification des fichiers
-cd "$INSTALL_DIR" 2>/dev/null || exit 1
 MISSING=0
+cd "$INSTALL_DIR" 2>/dev/null || exit 1
 
 for f in "${REQUIRED_FILES[@]}"; do
     if [[ ! -f "$f" ]]; then
@@ -32,22 +31,26 @@ for d in "${REQUIRED_DIRS[@]}"; do
     fi
 done
 
-# Si fichiers manquants → demande de réinstallation
+# Si fichiers manquants → re-clone complet
 if [[ "$MISSING" == 1 ]]; then
     echo -e "\n⚠️ Des fichiers sont manquants ou modifiés. Voulez-vous réinstaller AutoPwn ? (yes/no)"
     read -r answer
     if [[ "$answer" == "yes" ]]; then
         echo "[+] Téléchargement et installation d'AutoPwn…"
-        rm -rf "$INSTALL_DIR"
-        git clone "$REPO_URL" "$INSTALL_DIR"
-        cd "$INSTALL_DIR/$REPO_SUBDIR" || { echo "[-] Erreur : Chemin invalide."; exit 1; }
+        cd /opt || { echo "[-] Erreur : Impossible d'accéder à /opt"; exit 1; }
+        sudo rm -rf "$INSTALL_DIR"
+        git clone "$REPO_URL" "$INSTALL_DIR" || { echo "[-] Erreur : Clone échoué."; exit 1; }
 
-        # Déplacer tous les fichiers vers /opt/autopwn
-        mv * ../..
-        cd ../..
+        if [[ ! -d "$INSTALL_DIR/$REPO_SUBDIR" ]]; then
+            echo "[-] Erreur : Dossier $REPO_SUBDIR non trouvé après le clonage."
+            exit 1
+        fi
+
+        # Déplacer contenu du sous-dossier vers /opt/autopwn
+        mv "$INSTALL_DIR/$REPO_SUBDIR"/* "$INSTALL_DIR/"
         rm -rf "$INSTALL_DIR/$REPO_SUBDIR"
 
-        if [[ ! -f "$MAIN_FILE" ]]; then
+        if [[ ! -f "$INSTALL_DIR/$MAIN_FILE" ]]; then
             echo "[-] Erreur : Le fichier principal $MAIN_FILE est introuvable après le clonage."
             exit 1
         fi
