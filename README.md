@@ -19,6 +19,7 @@
 
 ---
 
+```bash
 ## 📁 Structure du Projet
 autopwn-1.0/
 ├── autopwn.py # Script principal (menu CLI)
@@ -34,7 +35,7 @@ autopwn-1.0/
 ├── dns_enum/ # Énumération DNS
 ├── hash_id/ # Identification de hash
 ├── web_tech/ # Détection de technologies Web
-
+```
 ---
 
 ### 📦 Dépendances
