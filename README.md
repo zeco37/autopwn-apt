@@ -1,21 +1,23 @@
-# 🔧 AutoPwn - v1.0
-**AutoPwn** est un outil de pentesting automatisé développé en Python 3, permettant d'exécuter divers modules de sécurité à travers une interface CLI professionnelle.
-## 📂 Structure du Projet
-autopwn-1.0/
-├── autopwn.py # Script principal
-├── setup_autopwn.sh # Script d'installation automatique
-├── scanner/ # Scan de ports, OS detection, vulnérabilités
-├── spoofing/ # Attaques ARP Spoof
-├── sniffing/ # Sniffing de trafic
-├── bruteforce/ # Brute force FTP, SSH, Web, HTTP Auth...
-├── exploits/ # Modules d'exploitation
-├── payloads/ # Générateur de payloads (EXE, reverse shell...)
-├── core/ # Fonctions internes de base
-├── listener/ # Listener Meterpreter personnalisé
-├── dns_enum/ # Enumération DNS
-├── hash_id/ # Identification de hash
-├── web_tech/ # Détection de technologies web
+# 🛠️ AutoPwn - v1.0
 
-yaml
-Copier
-Modifier
+**AutoPwn** est un outil de pentesting automatisé développé en Python 3, permettant d'exécuter divers modules de sécurité à travers une interface CLI professionnelle, simple et puissante.
+
+---
+
+## 🚀 Fonctionnalités Principales
+
+- 🔎 **Scan de Ports** (TCP, OS, détection de vulnérabilités)
+- 🕵️‍♂️ **Sniffing de trafic réseau**
+- 🧑‍💻 **ARP Spoofing** (MITM)
+- 🔐 **Bruteforce** (FTP, SSH, HTTP, etc.)
+- 🧬 **Identification de Hash**
+- 🌐 **Énumération DNS**
+- 🏗 **Détection de technologies Web**
+- 💣 **Générateur de payloads** (reverse shell, .exe, etc.)
+- 🎧 **Listener Meterpreter** personnalisé
+- 💥 **Modules d’exploitation** (exploits personnalisés)
+
+---
+
+## 📁 Structure du Projet
+
