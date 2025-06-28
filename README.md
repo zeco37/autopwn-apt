@@ -37,8 +37,6 @@ autopwn-1.0/
 
 ---
 
-## ⚙️ Installation
-
 ### 📦 Dépendances
 
 AutoPwn utilise Python 3. Assurez-vous que `pip` est installé.
@@ -59,9 +57,9 @@ sudo ./setup_autopwn.sh
   $ sudo autopwn
 ```
 ### 🧠 À propos
-🧑‍💻 **Développé par** : Zakaria BEALIOUI
+🧑‍💻 **Développé par** : Zakaria BELALIOUI
 
-📧 **Contact** : [Ajoute ton email ou lien GitHub]
+📧 **Contact** : zecodscrd@gmail.com
 
 📜 **Licence** : MIT
 
