@@ -9,15 +9,16 @@ MAIN_FILE="autopwn.py"
 REQUIRED_FILES=("autopwn.py" "setup_autopwn.sh")
 REQUIRED_DIRS=("scanner" "spoofing" "payloads" "core" "listener" "sniffer" "dns_enum" "web_tech" "bruteforce" "exploits" "hash_id")
 
-REQUIRED_PY_MODULES=(requests concurrent.futures hashlib re dns subprocess os nmap time sys threading builtwith scapy colorama rich bs4)
-
-echo "\n🔧 AutoPwn Setup – Lancement global sans python3"
+echo "🔧 AutoPwn Setup – Lancement global sans python3"
 
 mkdir -p "$INSTALL_DIR"
 
 # Vérification des fichiers
 MISSING=0
-cd "$INSTALL_DIR" 2>/dev/null || exit 1
+cd "$INSTALL_DIR" || {
+    echo "[-] Erreur : Impossible d'accéder à $INSTALL_DIR"
+    exit 1
+}
 
 for f in "${REQUIRED_FILES[@]}"; do
     if [[ ! -f "$f" ]]; then
@@ -39,9 +40,15 @@ if [[ "$MISSING" == 1 ]]; then
     read -r answer
     if [[ "$answer" == "yes" ]]; then
         echo "[+] Téléchargement et installation d'AutoPwn…"
-        cd /opt || { echo "[-] Erreur : Impossible d'accéder à /opt"; exit 1; }
+        cd /opt || {
+            echo "[-] Erreur : Impossible d'accéder à /opt"
+            exit 1
+        }
         sudo rm -rf "$INSTALL_DIR"
-        git clone "$REPO_URL" "$INSTALL_DIR" || { echo "[-] Erreur : Clone échoué."; exit 1; }
+        git clone "$REPO_URL" "$INSTALL_DIR" || {
+            echo "[-] Erreur : Clone échoué."
+            exit 1
+        }
 
         if [[ ! -d "$INSTALL_DIR/$REPO_SUBDIR" ]]; then
             echo "[-] Erreur : Dossier $REPO_SUBDIR non trouvé après le clonage."
@@ -64,14 +71,16 @@ else
     echo "✅ AutoPwn est déjà installé et à jour."
 fi
 
-# Vérification et installation des requirements Python
-echo "\n📦 Vérification des modules Python..."
-for mod in "${REQUIRED_PY_MODULES[@]}"; do
-    python3 -c "import $mod" 2>/dev/null || pip install $mod || pip3 install $mod || sudo apt install -y python3-$mod
-done
+# Installation des modules Python (sans venv)
+echo "[*] Vérification et installation des modules Python…"
+if [[ -f "$INSTALL_DIR/requirements.txt" ]]; then
+    python3 -m pip install --break-system-packages -r "$INSTALL_DIR/requirements.txt"
+else
+    echo "[-] Fichier requirements.txt introuvable."
+fi
 
 # Création du lanceur global
-echo "[*] Création du lanceur global..."
+echo "[*] Création du lanceur global…"
 echo -e "#!/bin/bash\npython3 \"$INSTALL_DIR/$MAIN_FILE\" \"\$@\"" | sudo tee "$LAUNCHER" >/dev/null
 sudo chmod +x "$LAUNCHER"
 
