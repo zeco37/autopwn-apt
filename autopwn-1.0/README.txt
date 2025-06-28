@@ -54,7 +54,7 @@ https://github.com/zeco37/autopwn-apt
 
 📌 AUTEUR :
 Zakaria BELALIOUI - zeco37
-Contact : zeco37@protonmail.com
+Contact : zecodscrd@gmail.com
 
 📅 VERSION :
 v1.0 – Juin 2025
