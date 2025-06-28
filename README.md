@@ -9,7 +9,7 @@
 - 🔎 **Scan de Ports** (TCP, OS, détection de vulnérabilités)
 - 🕵️‍♂️ **Sniffing de trafic réseau**
 - 🧑‍💻 **ARP Spoofing** (MITM)
-- 🔐 **Bruteforce** (FTP, SSH, HTTP, etc.)
+- 🔐 **Bruteforce** (DIRS)
 - 🧬 **Identification de Hash**
 - 🌐 **Énumération DNS**
 - 🏗 **Détection de technologies Web**
