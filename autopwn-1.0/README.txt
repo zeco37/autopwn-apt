@@ -1,7 +1,7 @@
 ##############################################################
 #                       AutoPwn - 1.0                        #
-#            Outil d'Automatisation de Pentesting           #
-#                Auteur : Ayoub / zeco37                    #
+#            Outil d'Automatisation de Pentesting            #
+#                Auteur : zakaria / zeco37                   #
 ##############################################################
 
 📌 DESCRIPTION :
@@ -18,7 +18,7 @@ Le projet est structuré comme suit :
 ├── scanner/               → Module de scan réseau
 ├── spoofing/              → Module d'ARP spoofing
 ├── sniffing/              → Module de sniff réseau
-├── bruteforce/            → Brute force (FTP, SSH, Web)
+├── bruteforce/            → Brute force (DIRS)
 ├── exploits/              → Scripts d'exploitation
 ├── payloads/              → Générateurs de payloads personnalisés
 ├── core/                  → Fonctions internes & helpers
@@ -40,13 +40,12 @@ Le projet est structuré comme suit :
 
 📋 PRÉREQUIS :
 - Python 3.x
-- pip install -r requirements.txt (si besoin)
 - OS testé : Kali Linux (fonctionne également sur Debian)
 
 ✅ UTILISATION :
 Lancez simplement la commande :
 
-   $ autopwn
+   $ sudo autopwn
 
 Puis suivez l’interface et choisissez les modules que vous souhaitez utiliser.
 
@@ -54,7 +53,7 @@ Puis suivez l’interface et choisissez les modules que vous souhaitez utiliser.
 https://github.com/zeco37/autopwn-apt
 
 📌 AUTEUR :
-Ayoub alias zeco37
+Zakaria BELALIOUI - zeco37
 Contact : zeco37@protonmail.com
 
 📅 VERSION :
