@@ -3,3 +3,4 @@ dnspython
 python-nmap
 scapy
 builtwith
+rich
