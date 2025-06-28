@@ -56,7 +56,7 @@ cd autopwn-apt/autopwn-1.0
 chmod +x setup_autopwn.sh
 sudo ./setup_autopwn.sh
 Une fois installé : 
-autopwn
+autopwn```
 
 🧠 À propos
 🧑‍💻 Développé par : Zakaria BEALIOUI
