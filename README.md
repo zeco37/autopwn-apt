@@ -19,8 +19,8 @@
 
 ---
 
-```bash
 ## 📁 Structure du Projet
+```bash
 autopwn-1.0/
 ├── autopwn.py # Script principal (menu CLI)
 ├── setup_autopwn.sh # Script d'installation global
