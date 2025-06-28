@@ -58,6 +58,7 @@ sudo ./setup_autopwn.sh
   $ sudo autopwn
 ```
 ### 🧠 À propos
+
 🧑‍💻 **Développé par** : Zakaria BELALIOUI
 
 📧 **Contact** : zecodscrd@gmail.com
@@ -65,10 +66,13 @@ sudo ./setup_autopwn.sh
 📜 **Licence** : MIT
 
 ### 📸 Aperçu
+
 ![image](https://github.com/user-attachments/assets/60b1fccd-c6dc-40f8-826e-6aa90d78c0e1)
 
 ### ❗ Avertissement
+
 Cet outil est à but éducatif uniquement. L’auteur décline toute responsabilité en cas d’usage abusif ou illégal.
+
 ---
 
 © 2025 Zakaria BEALIOUI. Tous droits réservés.
