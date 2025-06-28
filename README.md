@@ -69,3 +69,9 @@ sudo ./setup_autopwn.sh
 
 ### ❗ Avertissement
 Cet outil est à but éducatif uniquement. L’auteur décline toute responsabilité en cas d’usage abusif ou illégal.
+---
+
+© 2025 Zakaria BEALIOUI. Tous droits réservés.
+
+Ce projet est distribué sous la licence MIT. Voir le fichier LICENSE pour plus d’informations.
+
