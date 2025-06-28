@@ -29,7 +29,7 @@ Le projet est structuré comme suit :
 
 🛠 INSTALLATION :
 1. Exécutez le script d'installation automatique :
-
+   $ chmod +x setup_autopwn.sh
    $ sudo ./setup_autopwn.sh
 
 2. Cela installera le script dans /opt/autopwn et créera un alias global :
