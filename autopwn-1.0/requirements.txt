@@ -1,7 +1,0 @@
-requests
-dnspython
-python-nmap
-scapy
-builtwith
-rich
-python-nmap
